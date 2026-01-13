@@ -2,26 +2,37 @@
 
 ## Template Structure
 
-Each template is a folder in `templates/` with this layout:
+Templates are organized by category in `templates/`:
 
 ```
 templates/
-  your-template/
-    README.md           # Required: describe the template
-    claude/             # Provider folder
-      CLAUDE.md
-      skills/
-    openai/
-      SYSTEM.md
-    cursor/
-      .cursor/rules/
-    windsurf/
-      .windsurf/rules/
-    antigravity/
-      .antigravity/
-    default/            # Fallback if no provider matches
-      AGENT.md
+  <category>/
+    your-template/
+      README.md           # Required: describe the template
+      claude/             # Provider folder
+        CLAUDE.md
+        skills/
+      openai/
+        SYSTEM.md
+      cursor/
+        .cursor/rules/
+      windsurf/
+        rules/
+      antigravity/
+        rules/
+      default/            # Fallback if no provider matches
+        AGENT.md
 ```
+
+### Categories
+
+| Category | Use For |
+|----------|---------|
+| `languages/` | Programming language experts (Python, C, Rust, etc.) |
+| `testing/` | Testing methodologies, frameworks, DST |
+| `devops/` | CI/CD, IaC, containerization, GitOps |
+| `security/` | AppSec, threat modeling, secure coding |
+| `infrastructure/` | SRE, observability, platform engineering |
 
 ## Rules
 

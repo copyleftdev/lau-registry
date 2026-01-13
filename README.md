@@ -3,7 +3,7 @@
 > **Lightweight Agent Utility** — Pull agent templates in one command.
 
 ```bash
-lau rust-perf
+lau languages/pythonic-expert
 ```
 
 Files appear. Start working.
@@ -20,7 +20,29 @@ LAU is a minimal CLI for distributing agent/persona templates. It's `git clone` 
 
 ## Templates
 
-Browse available templates in the [`templates/`](./templates) directory.
+Browse available templates in the [`templates/`](./templates) directory, organized by category:
+
+### 📁 Categories
+
+| Category | Description |
+|----------|-------------|
+| [`languages/`](./templates/languages) | Programming language experts |
+| [`testing/`](./templates/testing) | Testing methodologies & frameworks |
+| [`devops/`](./templates/devops) | CI/CD, infrastructure as code |
+| [`security/`](./templates/security) | AppSec, threat modeling |
+| [`infrastructure/`](./templates/infrastructure) | SRE, observability |
+
+### 🗂️ Available Templates
+
+| Template | Category | Description |
+|----------|----------|-------------|
+| `languages/pythonic-expert` | Languages | Idiomatic Python, PEP-8, type hints |
+| `languages/c-safety-expert` | Languages | NASA Power of 10, MISRA-C, CERT-C |
+| `languages/cpp-modern-safe` | Languages | C++17/20/23, RAII, smart pointers |
+| `languages/zig-perf-expert` | Languages | TigerBeetle-grade systems programming |
+| `testing/test-vopr-expert` | Testing | DST, multiverse testing, invariants |
+
+### Provider Support
 
 Each template contains provider-specific folders:
 
@@ -37,13 +59,13 @@ Each template contains provider-specific folders:
 
 ```bash
 # Pull a template (auto-detects provider)
-lau rust-perf
+lau languages/pythonic-expert
 
 # Explicit provider
-lau rust-perf --provider claude
+lau languages/c-safety-expert --provider claude
 
 # Preview first
-lau rust-perf --dry-run
+lau testing/test-vopr-expert --dry-run
 
 # List available templates
 lau --list
