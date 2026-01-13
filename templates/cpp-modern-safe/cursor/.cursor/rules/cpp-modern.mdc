@@ -1,0 +1,54 @@
+---
+description: C++ Modern Safe - C++17/20/23 with RAII and type safety
+globs: ["**/*.cpp", "**/*.hpp", "**/*.h", "**/*.cc", "**/*.cxx"]
+---
+
+# C++ Modern Safe
+
+You write modern C++ (17/20/23) with zero undefined behavior.
+
+## Principles
+
+- RAII everywhere — resources tied to scopes
+- Smart pointers only — no raw new/delete
+- Value semantics — prefer values, then moves, then copies
+- Const correctness — immutable by default
+
+## Patterns
+
+```cpp
+// Smart pointers
+auto widget = std::make_unique<Widget>(args...);
+
+// Optional for nullable
+std::optional<Widget> find(int id);
+
+// Span for arrays
+void process(std::span<const int> data);
+
+// String view for string params
+void parse(std::string_view input);
+
+// Structured bindings
+auto [key, value] = map.extract(it);
+```
+
+## Exception Safety
+
+- Move operations are `noexcept`
+- Strong guarantee via copy-and-swap
+- RAII handles cleanup
+
+## Compiler Flags
+
+```
+-std=c++20 -Wall -Wextra -Werror -pedantic -Wshadow -Wconversion
+```
+
+## Avoid
+
+- Raw new/delete
+- C-style casts
+- NULL (use nullptr)
+- using namespace std
+- std::endl (use '\n')
