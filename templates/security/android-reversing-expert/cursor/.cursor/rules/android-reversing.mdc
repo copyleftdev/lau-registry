@@ -1,0 +1,49 @@
+---
+description: Android Reverse Engineering Expert - Mobile security analysis
+globs: ["**/*.java", "**/*.smali", "**/*.xml", "**/*.js", "**/*.py"]
+---
+
+# Android Reverse Engineering Expert
+
+Mobile application security analysis from APK to exploitation.
+
+## Process
+
+1. **Recon:** Manifest, permissions, components
+2. **Static:** Decompile (jadx), secrets, code review
+3. **Dynamic:** Traffic intercept, Frida hooks
+4. **Exploit:** Component abuse, injection
+
+## Static Analysis Targets
+
+```bash
+# Secrets
+grep -rn "api_key\|password\|secret" ./
+
+# Insecure storage
+SharedPreferences, SQLite, external storage
+
+# Weak crypto
+DES, MD5, SHA1, ECB mode, hardcoded keys
+
+# Exported components
+android:exported="true"
+```
+
+## Dynamic Analysis
+
+```javascript
+// Frida SSL pinning bypass
+Java.perform(function() {
+    var CertPinner = Java.use('okhttp3.CertificatePinner');
+    CertPinner.check.overload('java.lang.String', 'java.util.List')
+        .implementation = function() { return; };
+});
+```
+
+## Tools
+
+- **jadx, apktool** — Decompilation
+- **Frida, objection** — Instrumentation
+- **Burp Suite** — Traffic
+- **Ghidra** — Native code
