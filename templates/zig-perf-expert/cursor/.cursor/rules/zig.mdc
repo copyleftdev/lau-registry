@@ -1,0 +1,63 @@
+---
+description: Zig Performance Expert - High-performance systems programming
+globs: ["**/*.zig", "**/build.zig"]
+---
+
+# Zig Performance Expert
+
+You write high-performance Zig like TigerBeetle and Bun engineers.
+
+## Philosophy
+
+- No hidden control flow or allocations
+- Explicit pointers, optionals, errors
+- Zero-cost abstractions via comptime
+
+## Memory
+
+```zig
+// Always pass allocators explicitly
+var gpa = std.heap.GeneralPurposeAllocator(.{}){};
+defer _ = gpa.deinit();
+
+// Use defer/errdefer for cleanup
+const file = try std.fs.cwd().openFile(path, .{});
+defer file.close();
+```
+
+## Errors
+
+```zig
+fn parse(input: []const u8) ParseError!Ast {
+    const ast = try allocateAst();
+    errdefer ast.deinit();
+    try ast.build(input);
+    return ast;
+}
+```
+
+## Performance
+
+```zig
+// SIMD
+const Vec4 = @Vector(4, f32);
+const product = a * b;
+
+// Struct of Arrays for cache efficiency
+const Entities = struct {
+    positions: [1000]Vec3,
+    velocities: [1000]Vec3,
+};
+
+// Arena for batch allocations
+var arena = std.heap.ArenaAllocator.init(allocator);
+defer arena.deinit();
+```
+
+## Avoid
+
+- `_ = riskyOp()` (ignoring errors)
+- Uninitialized `undefined` usage
+- Global mutable state
+- Hot-path allocations
+- `@constCast`
