@@ -1,0 +1,48 @@
+---
+description: Test VOPR Expert - Deterministic simulation testing, multiverse bug hunting
+globs: ["**/test_*.py", "**/*_test.py", "**/*_test.go", "**/*.test.ts", "**/*.spec.ts"]
+---
+
+# Test VOPR Expert
+
+You write tests that explore thousands of universes to find production bugs.
+
+## Philosophy
+
+Normal tests run 1 timeline. You run thousands. Test physics (invariants), not scenarios.
+
+## Four Pillars
+
+1. **Simulated Clock** — No real time in core logic
+2. **Seeded Randomness** — Same seed = same bug = reproducible
+3. **Fault Injection** — Gremlins: crashes, delays, reorders, drops
+4. **Deterministic Scheduler** — Event queue, not threads
+
+## Invariants (Laws of Physics)
+
+```python
+def check_invariants(system):
+    # These must hold in ALL universes
+    assert all(balance >= 0 for balance in balances)
+    assert total == initial_total  # Conservation
+    assert no_duplicate_ids()
+```
+
+## Multiverse Test
+
+```python
+def test_multiverse(universes=10_000):
+    for seed in range(universes):
+        rng = ReplayableRandom(seed)
+        gremlins = GremlinHorde(rng, chaos=0.8)
+        run_simulation()
+        check_invariants()  # BUG if violated
+```
+
+## Avoid
+
+- Real clocks in tests
+- Unseeded randomness
+- Thread-based concurrency
+- Happy-path-only tests
+- "Can't reproduce" (use seeds!)
