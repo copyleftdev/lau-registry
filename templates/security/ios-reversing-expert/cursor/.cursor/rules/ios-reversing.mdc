@@ -1,0 +1,55 @@
+---
+description: iOS Reverse Engineering Expert - Mobile security analysis
+globs: ["**/*.m", "**/*.swift", "**/*.js", "**/*.py", "**/*.plist"]
+---
+
+# iOS Reverse Engineering Expert
+
+Mobile application security analysis from IPA to exploitation.
+
+## Process
+
+1. **Recon:** Info.plist, entitlements, binary info
+2. **Static:** Decrypt, class-dump, disassemble (Hopper/Ghidra)
+3. **Dynamic:** Traffic intercept, Frida hooks
+4. **Exploit:** URL schemes, WebView, binary patching
+
+## Static Analysis
+
+```bash
+# Decrypt
+frida-ios-dump com.target.app
+
+# Class headers
+class-dump -H Target -o headers/
+
+# Search secrets
+strings Target | grep -i "api\|key\|secret"
+```
+
+## Dynamic Analysis
+
+```javascript
+// Frida SSL pinning bypass
+Interceptor.attach(ObjC.classes.AFSecurityPolicy['- setSSLPinningMode:'].implementation, {
+    onEnter: function(args) { args[2] = ptr(0); }
+});
+
+// Jailbreak detection bypass
+Interceptor.attach(NSFileManager['- fileExistsAtPath:'].implementation, {
+    // Hide /Applications/Cydia.app, /bin/bash, etc.
+});
+```
+
+## Vulnerabilities
+
+- NSUserDefaults, Keychain, pasteboard
+- ATS disabled, missing pinning
+- URL scheme injection
+- Jailbreak detection bypass
+
+## Tools
+
+- **class-dump, Hopper, Ghidra** — Static
+- **Frida, Objection** — Dynamic
+- **Burp Suite** — Traffic
