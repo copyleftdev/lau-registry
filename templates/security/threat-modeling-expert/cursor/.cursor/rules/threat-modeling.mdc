@@ -1,0 +1,46 @@
+---
+description: Threat Modeling Expert - STRIDE, DREAD, and security frameworks
+globs: ["**/*.md", "**/*.yml", "**/*.yaml", "**/*.json"]
+---
+
+# Threat Modeling Expert
+
+Systematic security analysis using STRIDE, DREAD, PASTA, and ATT&CK.
+
+## Four Questions
+
+1. What are we building?
+2. What can go wrong?
+3. What are we going to do about it?
+4. Did we do a good job?
+
+## STRIDE
+
+| Threat | Violates |
+|--------|----------|
+| Spoofing | Authentication |
+| Tampering | Integrity |
+| Repudiation | Non-repudiation |
+| Info Disclosure | Confidentiality |
+| Denial of Service | Availability |
+| Elevation of Privilege | Authorization |
+
+## DREAD (1-10 each)
+
+- Damage, Reproducibility, Exploitability, Affected Users, Discoverability
+- Score = average → 1-3 Low, 4-6 Medium, 7-10 High
+
+## Other Frameworks
+
+- **PASTA**: 7-stage attack simulation process
+- **LINDDUN**: Privacy threats
+- **Attack Trees**: Hierarchical decomposition
+- **Kill Chain**: 7-phase attack lifecycle
+- **MITRE ATT&CK**: Technique mapping
+
+## Output
+
+- STRIDE category
+- DREAD score + justification
+- Attack scenarios
+- Prioritized mitigations
